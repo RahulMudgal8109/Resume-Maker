@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login page</title>
+    <style>
+         body
+        {
+            background-color: rgb(159, 159, 255);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        input
+        {
+            border: 1px solid white;
+            margin: 10px;
+            width:160px;
+            height: 20px;
+            border-radius: 10px;
+        }
+        button{
+            display: block;
+            width:100px;
+            height:30px;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>Login page</h1>
+    <form action="/resume-builder-using-vanilla-javascript/resume.html" name="RegForm" onsubmit="return validateForm()">
+      <label for="EMail">Email-Id:- </label>
+      <input type="email" name="EMail" placeholder="a@gmail.com" />
+      <br />
+      <label for="Password">EmailId:- </label>
+      <input type="password" name="Password" placeholder="******" />
+
+      <button type="submit" value="Login" >Login</button>
+    </form>
+
+    <script>
+        let users = JSON.parse(localStorage.getItem('userList'));
+        console.log(users);
+
+      function validateForm() {
+        var email = document.forms["RegForm"]["EMail"].value;
+        var password = document.forms["RegForm"]["Password"].value;
+
+        if (email == "") {
+          alert("Please enter the email");
+          return false;
+        }
+        if (password == "") {
+          alert("Please enter the password");
+          return false;
+        }
+        if(users.some(person=>(person.email === email && person.password === password))){
+            alert('Logged in successfully');
+            return true;
+        }else{
+            alert('user not found');
+            return false;
+        }
+      }
+    </script>
+  </body>
+</html>
